@@ -1,0 +1,231 @@
+// Learning path step 3: hash map from string keys to int values.
+//
+// Layout: one flat array of `cap` slots (open addressing). Each slot is
+// EMPTY, FULL (holds a key and value), or a TOMBSTONE (held a key that was
+// removed).
+//
+// Hashing: FNV-1a over the key's bytes, 64-bit:
+//   h = 14695981039346656037
+//   for each byte b:  h ^= b;  h *= 1099511628211;
+// `cap` is always a power of two, so the starting slot is `h & (cap - 1)`
+// (the same as `h % cap`, but cheaper).
+//
+// Linear probing: if the starting slot isn't the one you want, try the next
+// slot, wrapping around at the end: `i = (i + 1) & (cap - 1)`.
+// - Lookups keep probing past FULL slots with other keys and past
+//   TOMBSTONEs. They stop at an EMPTY slot: the key isn't in the map.
+// - That's why remove can't just mark a slot EMPTY. A later key may have
+//   probed past this slot when it was inserted, and an EMPTY here would hide
+//   it. Remove marks the slot TOMBSTONE instead.
+//
+// Load factor: grow before an insert would make (len + tombstones) exceed 70%
+// of cap. Tombstones count because they make probes longer just like FULL
+// slots do. Integer form, no floats: (len + tombstones + 1) * 10 > cap * 7.
+// Growing allocates a new slot array and reinserts every FULL entry (not the
+// tombstones, which disappear). If tombstones >= len, rehash at the same cap
+// instead of doubling, since the table is mostly dead space. Start at cap 8.
+//
+// Ownership: the map copies each key on insert (malloc + memcpy) and frees
+// its copies on remove and in map_free. The caller's string can change or be
+// freed right after map_put returns.
+//
+// Rules carried over: an empty map ({NULL, 0, 0, 0}) allocates nothing,
+// failures return false and leave the map unchanged, and map_free is safe to
+// call twice.
+
+
+
+// The hash map exercise is set up in 3/hashMap.c, in the same format as before.
+// I checked the tests against my own implementation (kept in the scratchpad),
+// and they pass under sanitizers. Right now the stub compiles, with one
+// expected warning that map_grow is unused.
+
+// The map stores string keys and int values, which is what the LeetCode
+// problems need. The comment block at the top of the file is the spec: FNV-1a,
+//  linear probing, tombstones, the 70% load factor, and the copy-the-key
+// ownership rule. It's longer than the previous files because there are more
+// rules here.
+
+// A good order to work in:
+
+// 1. map_init and fnv1a. The first asserts check your hash against the
+// official FNV-1a test values, so you'll know straight away whether it's right.
+// 2. map_get, which is the probe loop. Everything else is built around it.
+// 3. map_put and map_grow.
+// 4. map_remove (tombstones) and map_free.
+
+// The last test inserts and removes 10,000 keys. It checks that tombstones don't pile up until there are no empty slots left (then a probe for a missing key would loop forever), and that they don't make the table keep doubling.
+
+#include <assert.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+enum slot_state { EMPTY, FULL, TOMBSTONE };
+
+struct slot {
+  enum slot_state state;
+  char *key;  // owned by the map when FULL; NULL otherwise
+  int value;
+};
+
+struct map {
+  struct slot *slots;
+  size_t cap;         // number of slots, 0 or a power of two
+  size_t len;         // FULL slots
+  size_t tombstones;  // TOMBSTONE slots
+};
+
+// Makes `m` an empty map. Allocates nothing.
+void map_init(struct map *m) {
+  // TODO
+  (void)m;
+}
+
+// FNV-1a hash of the string `key` (not including its '\0').
+static uint64_t fnv1a(const char *key) {
+  // TODO
+  (void)key;
+  return 0;
+}
+
+// Rebuilds the table at a new capacity (see "Load factor" above) and
+// reinserts every FULL entry. The keys move over as pointers: no copying.
+// Returns false if the allocation fails, leaving `m` unchanged.
+// Hint: calloc zeroes memory, and EMPTY is 0, so calloc gives all-EMPTY slots.
+static bool map_grow(struct map *m) {
+  // TODO
+  (void)m;
+  return false;
+}
+
+// Sets `key` to `value`, inserting it if it's new or updating it if it's
+// already there. Returns false if memory runs out, leaving `m` unchanged.
+bool map_put(struct map *m, const char *key, int value) {
+  // TODO
+  (void)m;
+  (void)key;
+  (void)value;
+  return false;
+}
+
+// If `key` is in the map, stores its value in *out and returns true.
+// Otherwise returns false and leaves *out alone.
+bool map_get(const struct map *m, const char *key, int *out) {
+  // TODO
+  (void)m;
+  (void)key;
+  (void)out;
+  return false;
+}
+
+// Removes `key` if present. Returns true if it was there.
+bool map_remove(struct map *m, const char *key) {
+  // TODO
+  (void)m;
+  (void)key;
+  return false;
+}
+
+// Frees every key and the slot array, and resets `m` to empty.
+void map_free(struct map *m) {
+  // TODO
+  (void)m;
+}
+
+static bool load_ok(const struct map *m) {
+  return (m->len + m->tombstones) * 10 <= m->cap * 7;
+}
+
+int main(void) {
+  struct map m;
+  map_init(&m);
+  assert(m.slots == NULL && m.cap == 0 && m.len == 0 && m.tombstones == 0);
+
+  // Hash values from the FNV-1a reference test vectors.
+  assert(fnv1a("") == 14695981039346656037u);
+  assert(fnv1a("a") == 0xaf63dc4c8601ec8cu);
+  assert(fnv1a("foobar") == 0x85944171f73967e8u);
+
+  int v = -1;
+  assert(!map_get(&m, "missing", &v));  // lookup in an empty map
+  assert(v == -1);
+  assert(!map_remove(&m, "missing"));
+
+  assert(map_put(&m, "apple", 1));
+  assert(map_put(&m, "banana", 2));
+  assert(map_get(&m, "apple", &v) && v == 1);
+  assert(map_get(&m, "banana", &v) && v == 2);
+  assert(!map_get(&m, "cherry", &v));
+  assert(m.len == 2);
+
+  // Updating an existing key doesn't add a new entry.
+  assert(map_put(&m, "apple", 10));
+  assert(map_get(&m, "apple", &v) && v == 10);
+  assert(m.len == 2);
+
+  // The map keeps its own copy of the key.
+  char buf[16] = "grape";
+  assert(map_put(&m, buf, 3));
+  strcpy(buf, "XXXXX");
+  assert(map_get(&m, "grape", &v) && v == 3);
+  assert(!map_get(&m, "XXXXX", &v));
+
+  // Remove, then the key is gone but the others are still found.
+  assert(map_remove(&m, "banana"));
+  assert(!map_remove(&m, "banana"));
+  assert(!map_get(&m, "banana", &v));
+  assert(map_get(&m, "apple", &v) && v == 10);
+  assert(m.len == 2);
+  assert(map_put(&m, "banana", 20));
+  assert(map_get(&m, "banana", &v) && v == 20);
+  map_free(&m);
+  assert(m.slots == NULL && m.cap == 0 && m.len == 0 && m.tombstones == 0);
+
+  // Many keys: forces several resizes. Every key must still be found.
+  char key[32];
+  for (int i = 0; i < 2000; i++) {
+    snprintf(key, sizeof key, "key%d", i);
+    assert(map_put(&m, key, i));
+    assert(load_ok(&m));
+  }
+  assert(m.len == 2000);
+  for (int i = 0; i < 2000; i++) {
+    snprintf(key, sizeof key, "key%d", i);
+    assert(map_get(&m, key, &v) && v == i);
+  }
+
+  // Remove every even key. With this many keys, plenty of odd keys probed
+  // past an even key's slot on insert, so this checks that lookups continue
+  // past tombstones.
+  for (int i = 0; i < 2000; i += 2) {
+    snprintf(key, sizeof key, "key%d", i);
+    assert(map_remove(&m, key));
+  }
+  assert(m.len == 1000);
+  for (int i = 0; i < 2000; i++) {
+    snprintf(key, sizeof key, "key%d", i);
+    bool found = map_get(&m, key, &v);
+    assert(found == (i % 2 == 1));
+    if (found) assert(v == i);
+  }
+  map_free(&m);
+
+  // Insert/remove churn: tombstones must not pile up until the table is
+  // full (an endless probe) or keep doubling the table.
+  for (int i = 0; i < 10000; i++) {
+    snprintf(key, sizeof key, "tmp%d", i);
+    assert(map_put(&m, key, i));
+    assert(map_remove(&m, key));
+    assert(load_ok(&m));
+  }
+  assert(m.len == 0);
+  assert(m.cap <= 64);
+
+  map_free(&m);
+  map_free(&m);
+  return 0;
+}
