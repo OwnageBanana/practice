@@ -103,7 +103,7 @@ static bool map_grow(struct map *m) {
   if (m->len == 0) newCap = 16;
   else {
     newCap = 1;
-    while(newCap * 7 < m->len * 10) newCap *= 2;
+    while(newCap * 7 < (m->len + 1) * 10) newCap *= 2;
   }
 
   struct slot *p = calloc(newCap, sizeof(struct slot));
@@ -149,7 +149,7 @@ static bool map_grow(struct map *m) {
 // already there. Returns false if memory runs out, leaving `m` unchanged.
 bool map_put(struct map *m, const char *key, int value) {
 
-  if ((m->len + m->tombstones) * 10 >= m->cap * 7) {
+  if ((m->len + 1 + m->tombstones) * 10 >= m->cap * 7) {
     if (!map_grow(m)) return false;
   }
   // hash is some random string of bits, & (cap - 1) limits it to the indexable range of the array of slots.
@@ -289,7 +289,7 @@ int main(void) {
   for (int i = 0; i < 2000; i++) {
     snprintf(key, sizeof key, "key%d", i);
     assert(map_put(&m, key, i));
-    // assert(load_ok(&m));
+    assert(load_ok(&m));
   }
   assert(m.len == 2000);
   for (int i = 0; i < 2000; i++) {
@@ -319,7 +319,7 @@ int main(void) {
     snprintf(key, sizeof key, "tmp%d", i);
     assert(map_put(&m, key, i));
     assert(map_remove(&m, key));
-    // assert(load_ok(&m));
+    assert(load_ok(&m));
   }
   assert(m.len == 0);
   assert(m.cap <= 64);
