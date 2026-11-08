@@ -81,8 +81,8 @@ static uint64_t fnv1a(const char *key) {
   while (*key != '\0') {
     // for an explaination on why this prime was chosen
     //https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function#FNV_hash_parameters
-    h ^= (uint64_t)*key; h *= 1099511628211u; // FNV 1a prime
-    // h *= 1099511628211; h ^= (uint64_t)*key;
+    h ^= (unsigned char)*key; h *= 1099511628211u; // FNV 1a prime
+    // h *= 1099511628211; h ^= (unsigned char)*key;
     // // FNV 1 reverses the order of when we xor/prime multiply
     // "The change in order [of fnv 1a from fnv 1] leads to slightly better avalanche characteristics."
     // aka better randomness between keys when changing 1 bit
@@ -170,6 +170,9 @@ bool map_put(struct map *m, const char *key, int value) {
     } else if(m->slots[i].state == EMPTY) {
       size_t slen = strlen(key) + 1;
       m->slots[i].key = malloc(slen);
+      if (m->slots[i].key == NULL) {
+        return false;
+      }
       m->slots[i].state = FULL;
       m->slots[i].key = memcpy(m->slots[i].key, key, slen);
       m->slots[i].value = value;
