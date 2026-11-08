@@ -865,6 +865,94 @@ How do you trim a finished buffer, and what if the trim fails?::`realloc(out, le
 
 When is trimming a finished string worth it?::For long-lived, numerous strings (e.g. hash map keys). A shrinking `realloc` may copy the block, and small blocks gain little.
 
+# Hash maps
+
+What does a hash map do with a key so it doesn't have to scan?::Hashes it to a number, turns that into a slot index, and looks there first.
+
+What are a hash map's average and worst-case costs for lookup, insert, and remove?::O(1) on average. O(n) in the worst case, when many keys land in the same place.
+
+What is a hash collision?::Two different keys mapping to the same slot.
+
+How do chaining and open addressing handle collisions?::Chaining gives each slot a linked list of entries. Open addressing keeps one flat array and puts the colliding key in another slot of it.
+
+In open addressing, each slot is ==EMPTY== (never used since the last rebuild), ==FULL== (holds a key and value), or ==TOMBSTONE== (held a key that was removed).
+
+Why make EMPTY the 0 value of the slot-state enum?::`calloc` then gives an all-EMPTY table.
+
+In linear probing, how do you move to the next slot?::`i = (i + 1) & (cap - 1)`: the next slot, wrapping around at the end.
+
+In a linear-probing lookup, which slots do you probe past, and where do you stop?::Past FULL slots holding other keys and past TOMBSTONEs. Stop at an EMPTY slot: the key isn't there.
+
+Why can't remove mark a slot EMPTY in open addressing?::Another key may have probed past this slot when it was inserted. An EMPTY there would stop lookups early and hide that key.
+
+What does a TOMBSTONE tell a lookup?::Keep probing.
+
+What does remove do with the removed slot's key?::Frees the map's copy and sets `key` to NULL.
+
+With a power-of-two `cap`, how do you turn a hash `h` into a slot index?::`h & (cap - 1)`, the same as `h % cap` but cheaper.
+
+Why does `h & (cap - 1)` work when `cap` is a power of two?::`cap - 1` is all 1 bits (e.g. `0b111` for 8), so it keeps the low bits of the hash.
+
+Why should a probe loop also count probes (`j < cap`)?::So it can't spin forever on a table with no EMPTY slot.
+
+Why is a probe loop safe on an empty map (`cap == 0`, `slots == NULL`)?::`cap - 1` wraps to `SIZE_MAX`, but `j < cap` makes the loop run 0 times, so `slots` is never read.
+
+How does FNV-1 differ from FNV-1a?::FNV-1 multiplies before the XOR. FNV-1a XORs first, which gives slightly better avalanche.
+
+What is avalanche in a hash function?::Changing one input bit changes many of the output bits.
+
+How do you check an FNV-1a implementation?::Against the official test values, e.g. `fnv1a("")` must return the offset basis.
+
+Why does `(uint64_t)*key` break FNV-1a for non-ASCII bytes on x86?::`char` is signed, so a byte like `0xE9` sign-extends to `0xFFFFFFFFFFFFFFE9`.
+
+How should a hash read each byte of a `char *` key?::`h ^= (unsigned char)*key;`, which keeps each value between 0 and 255.
+
+Why does `h ^= *key;` trigger `-Wsign-conversion`?::`*key` promotes to a signed `int`, which then converts to `uint64_t`.
+
+What is a hash map's load factor (counting tombstones)?::(FULL + TOMBSTONE slots) / `cap`.
+
+Why grow a hash map before its load factor passes a limit like 0.7?::Probe runs get longer as it rises, and lookups slow toward O(n).
+
+Why do tombstones count toward the load factor?::Probes walk past them just like FULL slots.
+
+What's the integer-only grow check for a 0.7 load limit?::Grow when `(len + tombstones + 1) * 10 > cap * 7`.
+
+Why does the grow check add 1 to `len + tombstones`?::`load_ok` is about the map after the put, so test the state the insert will create. Size a resized table for `len + 1` for the same reason.
+
+Why can't a resize just copy the old slot array?::A key's slot depends on `cap` (`h & (cap - 1)`), so every FULL entry must be reinserted.
+
+What happens to tombstones when a hash table is rebuilt?::They aren't copied, so the rebuild clears them.
+
+How do the keys get into the new table during a rehash?::As pointers, with no new copies.
+
+When should a rebuild keep the same capacity instead of doubling?::When tombstones make up much of the table. Sizing from `len + 1`, not from the old `cap`, does this automatically.
+
+How does a map that borrows keys differ from one that copies them?::Borrowing stores the caller's pointer, so the caller must keep the string alive and unchanged. Copying makes its own copy, so the caller can change or free its string right after `map_put`.
+
+How does a copying map store a key?::`malloc(strlen(key) + 1)`, then `memcpy` the key with its `'\0'`.
+
+When does a copying map free its key copies?::On remove and in `map_free`.
+
+How does `map_put` fail without changing the map when `malloc` fails?::Check `malloc`'s result before marking the slot FULL or changing `len`, so the slot stays EMPTY.
+
+Why is it fine if `map_put` grew the table before its `malloc` failed?::The map still holds the same keys and values.
+
+What does Two Sum (LeetCode 1) ask?::Given an `int` array and a `target`, return the indices of the two elements that add up to `target`. There's exactly one answer, and no element is used twice.
+
+How does a hash map solve Two Sum in one pass?::For each `x`, look up `target - x` among the values already seen (value → index). If it's there, that's the pair. Otherwise store `x`.
+
+What do Two Sum's brute force and hash map solutions cost?::Brute force checks every pair, O(n²). The hash map is O(n) time and O(n) extra memory.
+
+## What is the 64-bit FNV-1a loop? #card
+
+```c
+uint64_t h = 14695981039346656037u;  // offset basis
+for (; *key != '\0'; key++) {
+  h ^= (unsigned char)*key;
+  h *= 1099511628211u;               // FNV prime
+}
+```
+
 # Undefined behavior and the standard
 
 Where are C's rules defined?::In the ISO C standard. C17 is ISO/IEC 9899:2018.
@@ -1018,6 +1106,8 @@ My `sb_append` never updated `s->len`. What breaks, and what's the fix?::The nex
 Is a string builder a series of strings like `hello\0world\0`?::No, it's one string. `data + len` is the old `'\0'`, which each append overwrites with its first char.
 
 My `sb_reserve` doubling loop made room for `extra` chars. Why did appending 16 chars to an empty builder overflow?::The loop forgot the `'\0'`, giving a 16-byte buffer for a 17-byte `memcpy`. Compute `need = len + extra + 1` once and loop `while (newCap < need)`.
+
+My `map_put` grew when `(len + tombstones) * 10 >= cap * 7`. Why did `load_ok` fail after some puts?::The check tested the map before the insert, so the insert could push it over 70%. Count the incoming key (`len + tombstones + 1`) in the trigger and when sizing the new table, instead of disabling the asserts.
 
 ## What's wrong with `char *(*f)(int) = &(int a){return a+1;}; *f(2);`? #card
 

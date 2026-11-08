@@ -234,6 +234,10 @@ void map_free(struct map *m) {
   map_init(m);
 }
 
+// The tests below are skipped when another file includes this one with
+// HASHMAP_NO_MAIN defined (e.g. twoSumLeet.c), so it gets the map without main.
+#ifndef HASHMAP_NO_MAIN
+
 static bool load_ok(const struct map *m) {
   return (m->len + m->tombstones) * 10 <= m->cap * 7;
 }
@@ -327,3 +331,4 @@ int main(void) {
   map_free(&m);
   return 0;
 }
+#endif  // HASHMAP_NO_MAIN
