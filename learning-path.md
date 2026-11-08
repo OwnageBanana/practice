@@ -13,7 +13,7 @@ sudo dnf install gcc clang gdb valgrind make perf
 Compile everything during development with sanitizers on:
 
 ```
-gcc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -g -fsanitize=address,undefined -o main main.c
+gcc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -g -fsanitize=address,undefined -o main.out main.c
 ```
 
 ASan plus UBSan catches out-of-bounds, use-after-free, leaks, and signed overflow at the bug site rather than three calls later. Keep a second unsanitized build for valgrind and perf. Learn gdb the first time you segfault: `break`, `run`, `bt`, `frame`, `print`, `watch`. Never debug with printf.

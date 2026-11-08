@@ -1018,3 +1018,11 @@ My `sb_append` never updated `s->len`. What breaks, and what's the fix?::The nex
 Is a string builder a series of strings like `hello\0world\0`?::No, it's one string. `data + len` is the old `'\0'`, which each append overwrites with its first char.
 
 My `sb_reserve` doubling loop made room for `extra` chars. Why did appending 16 chars to an empty builder overflow?::The loop forgot the `'\0'`, giving a 16-byte buffer for a 17-byte `memcpy`. Compute `need = len + extra + 1` once and loop `while (newCap < need)`.
+
+## What's wrong with `char *(*f)(int) = &(int a){return a+1;}; *f(2);`? #card
+
+1. C has no anonymous functions. Define a named function and point at it.
+2. `a+1` is an `int`, but `f` promises to return a `char *`.
+3. `*f(2)` means `*(f(2))`: it dereferences the result. Call with `f(2)` or `(*f)(2)`.
+^q-xktz
+
