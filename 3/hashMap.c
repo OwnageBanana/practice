@@ -113,26 +113,20 @@ static bool map_grow(struct map *m) {
   size_t newLen = 0;
 
   while(s < m->slots + m->cap) {
+    if (s->state != FULL) { s++; continue; }
 
-    // if (s->state == EMPTY) { }
-    /* else */
-    if (s->state == TOMBSTONE) {
-      free(s->key);
-    } else if (s->state == FULL) {
-
-      uint64_t h = fnv1a(s->key);
-      // do put of slot info in new array of slots
-      size_t capMask = newCap - 1;
-      for(size_t j = 0, i = h & capMask;
-        j < newCap;
-        j++, i = (i + 1) & capMask) {
-          if (p[i].state == FULL) continue;
-          p[i].state = FULL;
-          p[i].key = s->key; // reuse key pointer, no copy
-          p[i].value = s->value;
-          newLen++;
-          break;
-      }
+    uint64_t h = fnv1a(s->key);
+    // do put of slot info in new array of slots
+    size_t capMask = newCap - 1;
+    for(size_t j = 0, i = h & capMask;
+      j < newCap;
+      j++, i = (i + 1) & capMask) {
+        if (p[i].state == FULL) continue;
+        p[i].state = FULL;
+        p[i].key = s->key; // reuse key pointer, no copy
+        p[i].value = s->value;
+        newLen++;
+        break;
     }
     s++;
   }
@@ -218,6 +212,7 @@ bool map_remove(struct map *m, const char *key) {
     else if (m->slots[i].state == TOMBSTONE) continue;
     else if (m->slots[i].state == FULL && 0 == strcmp(m->slots[i].key, key)) {
       m->slots[i].state = TOMBSTONE;
+      free(m->slots[i].key); // free the key for a tombstone. that memory doesn't need to persist
       m->tombstones++;
       m->len--;
       return true;
@@ -230,7 +225,7 @@ bool map_remove(struct map *m, const char *key) {
 void map_free(struct map *m) {
   // TODO
   for (size_t i = 0; i < m->cap; i++) {
-    if (m->slots[i].state != EMPTY){
+    if (m->slots[i].state == FULL){
       free(m->slots[i].key);
     }
   }
