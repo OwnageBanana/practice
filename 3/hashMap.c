@@ -213,6 +213,7 @@ bool map_remove(struct map *m, const char *key) {
     else if (m->slots[i].state == FULL && 0 == strcmp(m->slots[i].key, key)) {
       m->slots[i].state = TOMBSTONE;
       free(m->slots[i].key); // free the key for a tombstone. that memory doesn't need to persist
+      m->slots[i].key = NULL;
       m->tombstones++;
       m->len--;
       return true;
