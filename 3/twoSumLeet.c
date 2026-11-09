@@ -1,3 +1,4 @@
+// gcc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -g -fsanitize=address,undefined -o twoSums.out twoSumLeet.c
 // LeetCode 1. Two Sum
 //
 // Given an array of ints `nums` and an int `target`, return the indices of
@@ -25,6 +26,7 @@
 
 #define HASHMAP_NO_MAIN
 #include "hashMap.c"
+#include <stdio.h>
 
 int *twoSum(const int *nums, int numsSize, int target, int *returnSize) {
   // TODO
