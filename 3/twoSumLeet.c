@@ -49,7 +49,7 @@ int *twoSum(const int *nums, int numsSize, int target, int *returnSize) {
 
   *returnSize = 0;
   if (numsSize == 2) {
-  int *ret = malloc(2 * sizeof(int));
+    int *ret = malloc(2 * sizeof(int));
     *returnSize = 2;
     ret[0] = 0; ret[1] = 1;
     return ret;
