@@ -8,12 +8,7 @@
 #include <string.h>
 
 
-void fn () {
-
-}
-
 int main () {
-
   char *hw = "hello world";
 
   size_t t1 = strlen(hw); // 11

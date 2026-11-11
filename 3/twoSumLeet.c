@@ -28,12 +28,63 @@
 #include "hashMap.c"
 #include <stdio.h>
 
+size_t count_places(int n) {
+  if (n == 0) return 1;
+  size_t size = 0;
+  while (n != 0){
+    n /= 10;
+    size++;
+  }
+  return size;
+}
+
+
 int *twoSum(const int *nums, int numsSize, int target, int *returnSize) {
-  // TODO
-  (void)nums;
-  (void)numsSize;
-  (void)target;
+  assert(numsSize > 1 && "Nums array needs at least 2 elements");
+
   *returnSize = 0;
+  if (numsSize == 2) {
+  int *ret = malloc(2 * sizeof(int));
+    *returnSize = 2;
+    ret[0] = 0; ret[1] = 1;
+    return ret;
+  }
+
+  struct map m;
+  map_init(&m);
+  const int *p = nums;
+  while (p < nums + numsSize) {
+
+    int tDiff = target - *p;
+    //snprintf setup
+    size_t sign = 0;
+    if (tDiff < 0) sign = 1;
+    int val;
+    size_t keySize = count_places(tDiff) + sign + 1;
+    char *key = malloc(keySize);
+    snprintf(key,keySize, "%d", tDiff);
+    // get to see if the diff value is in the map. c - a = b
+    bool get = map_get(&m, key, &val);
+    free(key);
+    if (get) {
+      *returnSize = 2;
+      int *ret = malloc(2 * sizeof(int));
+      ret[0] = val; ret[1] = (int)(p - nums);
+      map_free(&m);
+      return ret;
+    }
+    // if failed get, insert *p
+    sign = 0;
+    if (*p < 0) sign = 1;
+    keySize = count_places(*p) + sign + 1;
+    key = malloc(keySize);
+    snprintf(key, keySize, "%d", *p);
+    bool put = map_put(&m, key, (int)(p - nums));
+    assert(put && "your map couldn't insert, go check your broken code :)");
+    free(key);
+    p++;
+  }
+
   return NULL;
 }
 
@@ -59,6 +110,12 @@ static void check(const int *nums, int n, int target, int i, int j) {
 }
 
 int main(void) {
+  assert(count_places(0) == 1);
+  assert(count_places(1) == 1);
+  assert(count_places(10) == 2);
+  assert(count_places(-1) == 1);
+  assert(count_places(-10) == 2);
+  assert(count_places(120351581) == 9);
   check((int[]){2, 7, 11, 15}, 4, 9, 0, 1);
   check((int[]){3, 2, 4}, 3, 6, 1, 2);
 
