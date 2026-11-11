@@ -28,9 +28,14 @@
 #include "hashMap.c"
 #include <stdio.h>
 
-size_t count_places(int n) {
-  if (n == 0) return 1;
-  size_t size = 0;
+// find the number of caracters required to represent a standard decimal number
+// includes space for negative sign and \0
+size_t count_str_size(int n) {
+  if (n == 0) return 2;
+  size_t size = 1;
+  if (n < 0) {
+    size += 1;
+  };
   while (n != 0){
     n /= 10;
     size++;
@@ -49,42 +54,43 @@ int *twoSum(const int *nums, int numsSize, int target, int *returnSize) {
     ret[0] = 0; ret[1] = 1;
     return ret;
   }
+  size_t keySize = count_str_size(target);
+  const int *p = nums;
+  while (p < nums + numsSize) {
+    size_t newSize = count_str_size(*p);
+    if (keySize < newSize) keySize = newSize;
+    p++;
+  }
+  char *key = malloc(keySize);
+  assert(key != NULL);
 
   struct map m;
   map_init(&m);
-  const int *p = nums;
+  p = nums;
   while (p < nums + numsSize) {
 
     int tDiff = target - *p;
     //snprintf setup
-    size_t sign = 0;
-    if (tDiff < 0) sign = 1;
     int val;
-    size_t keySize = count_places(tDiff) + sign + 1;
-    char *key = malloc(keySize);
     snprintf(key,keySize, "%d", tDiff);
     // get to see if the diff value is in the map. c - a = b
     bool get = map_get(&m, key, &val);
-    free(key);
     if (get) {
       *returnSize = 2;
       int *ret = malloc(2 * sizeof(int));
       ret[0] = val; ret[1] = (int)(p - nums);
       map_free(&m);
+      free(key);
       return ret;
     }
     // if failed get, insert *p
-    sign = 0;
-    if (*p < 0) sign = 1;
-    keySize = count_places(*p) + sign + 1;
-    key = malloc(keySize);
     snprintf(key, keySize, "%d", *p);
     bool put = map_put(&m, key, (int)(p - nums));
     assert(put && "your map couldn't insert, go check your broken code :)");
-    free(key);
     p++;
   }
-
+  map_free(&m);
+  free(key);
   return NULL;
 }
 int *twoSum_Brute(const int *nums, int numsSize, int target, int *returnSize) {
@@ -132,7 +138,6 @@ static void check(const int *nums, int n, int target, int i, int j) {
   int size = -1;
   int *got = ALGO(in, n, target, &size);
   assert(got != NULL);
-  printf("%d %d\n", got[0], got[1]);
   assert(size == 2);
   assert((got[0] == i && got[1] == j) || (got[0] == j && got[1] == i));
   free(got);
@@ -140,12 +145,12 @@ static void check(const int *nums, int n, int target, int i, int j) {
 }
 
 int main(void) {
-  assert(count_places(0) == 1);
-  assert(count_places(1) == 1);
-  assert(count_places(10) == 2);
-  assert(count_places(-1) == 1);
-  assert(count_places(-10) == 2);
-  assert(count_places(120351581) == 9);
+  assert(count_str_size(0) == 2);
+  assert(count_str_size(1) == 2);
+  assert(count_str_size(10) == 3);
+  assert(count_str_size(-1) == 3);
+  assert(count_str_size(-10) == 4);
+  assert(count_str_size(123456789) == 10);
   check((int[]){2, 7, 11, 15}, 4, 9, 0, 1);
   check((int[]){3, 2, 4}, 3, 6, 1, 2);
 
