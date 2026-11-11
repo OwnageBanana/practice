@@ -54,33 +54,26 @@ int *twoSum(const int *nums, int numsSize, int target, int *returnSize) {
     ret[0] = 0; ret[1] = 1;
     return ret;
   }
-  size_t keySize = count_str_size(target);
-  const int *p = nums;
-  while (p < nums + numsSize) {
-    size_t newSize = count_str_size(*p);
-    if (keySize < newSize) keySize = newSize;
-    p++;
-  }
-  char *key = malloc(keySize);
-  assert(key != NULL);
+
+  char key[12] = {0};
+  size_t keySize = sizeof key;
+
 
   struct map m;
   map_init(&m);
-  p = nums;
+  const int *p = nums;
   while (p < nums + numsSize) {
 
     int tDiff = target - *p;
-    //snprintf setup
     int val;
-    snprintf(key,keySize, "%d", tDiff);
-    // get to see if the diff value is in the map. c - a = b
+    snprintf(key, keySize, "%d", tDiff);
+    //  see if the diff value is in the map. c - a = b
     bool get = map_get(&m, key, &val);
     if (get) {
       *returnSize = 2;
       int *ret = malloc(2 * sizeof(int));
       ret[0] = val; ret[1] = (int)(p - nums);
       map_free(&m);
-      free(key);
       return ret;
     }
     // if failed get, insert *p
@@ -90,7 +83,7 @@ int *twoSum(const int *nums, int numsSize, int target, int *returnSize) {
     p++;
   }
   map_free(&m);
-  free(key);
+  // free(key);
   return NULL;
 }
 int *twoSum_Brute(const int *nums, int numsSize, int target, int *returnSize) {
