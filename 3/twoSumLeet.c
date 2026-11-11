@@ -87,7 +87,31 @@ int *twoSum(const int *nums, int numsSize, int target, int *returnSize) {
 
   return NULL;
 }
-
+int *twoSum_Brute(const int *nums, int numsSize, int target, int *returnSize) {
+  *returnSize = 0;
+  if (numsSize == 2) {
+  int *ret = malloc(2 * sizeof(int));
+    *returnSize = 2;
+    ret[0] = 0; ret[1] = 1;
+    return ret;
+  }
+  const int *pin = nums;
+  const int *scan = nums+1;
+  while (pin < nums+numsSize - 1){
+    scan = pin + 1;
+    while (scan < nums+numsSize){
+      if (*pin + *scan == target) {
+        int *ret = malloc(2 * sizeof(int));
+        *returnSize = 2;
+        ret[0] = (int)(pin - nums); ret[1] = (int)(scan - nums);
+        return ret;
+      }
+      scan++;
+    }
+    pin++;
+  }
+  return NULL;
+}
 // Copies `nums` into a heap buffer of exactly n ints, so ASan reports any
 // read past the end.
 static int *copy(const int *nums, int n) {
@@ -97,12 +121,18 @@ static int *copy(const int *nums, int n) {
   return buf;
 }
 
+#define ALGO twoSum
+#ifndef ALGO
+#define ALGO twoSum_Brute
+#endif
+
 // Checks that twoSum returns {i, j} in either order.
 static void check(const int *nums, int n, int target, int i, int j) {
   int *in = copy(nums, n);
   int size = -1;
-  int *got = twoSum(in, n, target, &size);
+  int *got = ALGO(in, n, target, &size);
   assert(got != NULL);
+  printf("%d %d\n", got[0], got[1]);
   assert(size == 2);
   assert((got[0] == i && got[1] == j) || (got[0] == j && got[1] == i));
   free(got);
