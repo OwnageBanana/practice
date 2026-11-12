@@ -277,6 +277,16 @@ Why does gdb print the null byte as `'\000'`?::It writes non-printable chars as 
 
 In gdb's `0 '\000'`, what is the number before the char?::The char's integer value.
 
+Which call gives wall-clock time for timing code?::`clock_gettime(CLOCK_MONOTONIC, &ts)` from `<time.h>`. Take one before and one after, and subtract.
+
+What fields does `struct timespec` hold?::`tv_sec` and `tv_nsec`.
+
+What kind of build should you benchmark?::An optimized one (`-O2`) without `-fsanitize`, which slows things about 2x.
+
+Why print (or otherwise use) the result of code you're timing?::Otherwise the compiler can delete the work.
+
+Which shell commands time a whole program?::`time ./prog` or `perf stat ./prog`.
+
 ## Basic gdb commands #card
 
 ```
@@ -811,6 +821,12 @@ Where do `-l` libraries go on the link line, and why?::After the objects that us
 What do CMake and Meson do?::Generate Ninja or Make files for big projects.
 ^q-8k2n
 
+Why does `#include "hashMap.c"` give you two `main`s?::`#include` pastes in the whole file, including its `main`.
+
+How can you `#include` a `.c` file without its `main`?::Wrap its tests and `main` in `#ifndef HASHMAP_NO_MAIN` ... `#endif`, and `#define HASHMAP_NO_MAIN` before the include.
+
+What's the usual way to reuse another `.c` file's code, instead of `#include`-ing it?::Put the declarations in a header, compile the `.c` separately, and link.
+
 # Dynamic arrays and realloc
 
 What does `realloc(ptr, bytes)` do?::Resizes the heap block to `bytes`, keeping the old contents up to the smaller size. It may move the block.
@@ -1108,6 +1124,14 @@ Is a string builder a series of strings like `hello\0world\0`?::No, it's one str
 My `sb_reserve` doubling loop made room for `extra` chars. Why did appending 16 chars to an empty builder overflow?::The loop forgot the `'\0'`, giving a 16-byte buffer for a 17-byte `memcpy`. Compute `need = len + extra + 1` once and loop `while (newCap < need)`.
 
 My `map_put` grew when `(len + tombstones) * 10 >= cap * 7`. Why did `load_ok` fail after some puts?::The check tested the map before the insert, so the insert could push it over 70%. Count the incoming key (`len + tombstones + 1`) in the trigger and when sizing the new table, instead of disabling the asserts.
+
+Two Sum: I `malloc`'d an exactly sized buffer for each temporary key. What's better?::A stack buffer: `char key[12]; snprintf(key, sizeof key, "%d", x);`. The key lives for one call, and the map copies it anyway.
+
+Why is `char key[12]` enough to hold any `int` as text?::`"-2147483648"` is 11 chars, plus the `'\0'`.
+
+I thought exact sizing, or one reused `malloc`, beat a fixed stack buffer for a one-call key. Why not?::A stack buffer costs nothing to allocate and frees itself. The bytes saved don't matter for a key that lives one call.
+
+My Two Sum ended with `return NULL` without calling `map_free`. What happened?::The map leaked. Call `map_free` before returning.
 
 ## What's wrong with `char *(*f)(int) = &(int a){return a+1;}; *f(2);`? #card
 
