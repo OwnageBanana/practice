@@ -1,4 +1,6 @@
-// gcc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -g -fsanitize=address,undefined -o groupAnagrams.out groupAnagramsLeet.c
+/*
+gcc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -g -fsanitize=address,undefined -o groupAnagrams.out groupAnagramsLeet.c
+ */
 // LeetCode 49. Group Anagrams
 //
 // Given an array of strings `strs`, group the strings that are anagrams of
@@ -129,6 +131,7 @@ static void check(const char *const *words, int n, int groups) {
   } while (0)
 
 int main(void) {
+
   CHECK(3, "eat", "tea", "tan", "ate", "nat", "bat");
   CHECK(1, "");
   CHECK(1, "a");
