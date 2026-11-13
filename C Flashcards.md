@@ -59,7 +59,7 @@ flashcards:
   q-qdiu: { nid: 1793209930006, hash: gh3vua5b, sync: zereegvz }
   q-826c: { nid: 1793209930060, hash: 52hrbe6z, sync: are7djhr }
   q-p69h: { nid: 1793209930138, hash: 496efmzv, sync: 6abnp2id }
-  q-xktz: { nid: 1793209930204, hash: mfmkffww, sync: wkzeq3da }
+  q-xktz: { nid: 1794573662182, hash: mfmkffww, sync: wkzeq3da }
   q-p8mt: { nid: 1793302708798, hash: ciuwky3c, sync: byt8eb6f }
   q-tzes: { nid: 1793302708853, hash: t4vq3wiw, sync: kunc777p }
   q-dvar: { nid: 1793302708902, hash: m8z83nt6, sync: siwxjbzp }
@@ -213,6 +213,109 @@ flashcards:
   q-pm5y: { nid: 1793824735406, hash: rw9b2kgp, sync: sfneys9p }
   q-pdv4: { nid: 1793824735457, hash: e5xv88z5, sync: qxjyha7r }
   q-6yuh: { nid: 1793824735505, hash: wehc3giu, sync: 84u9c76t }
+  q-ys5e: { hash: ejtscqyk }
+  q-pvvd: { hash: 9q8wp2qu }
+  q-b95s: { hash: 89yt7f8r }
+  q-caws: { hash: fd6hwxd6 }
+  q-8b7h: { hash: nz9j2dfj }
+  q-di2h: { hash: 4dr5m9b7 }
+  q-7axi: { nid: 1794573657346, hash: 5eacp649, sync: 63ax797h }
+  q-i62j: { nid: 1794573657382, hash: t7pkjcja, sync: 2dqy42mi }
+  q-fjy2: { nid: 1794573657431, hash: uctaszm5, sync: yn48fja9 }
+  q-ek54: { nid: 1794573657480, hash: qpwmbsxk, sync: 9unr7qjg }
+  q-qck6: { nid: 1794573657530, hash: 8zevqyni, sync: aycp7k3r }
+  q-4z6m: { hash: shcaaj5v }
+  q-inz3: { hash: 2hwzw54k }
+  q-5ddf: { hash: rbkwx67e }
+  q-uhwq: { hash: c5phsiv9 }
+  q-ywkx: { nid: 1794573657792, hash: b4k2j84b, sync: 55wdzc88 }
+  q-6tu6: { nid: 1794573657831, hash: c89ja4vf, sync: x9c9u3ty }
+  q-eu8h: { nid: 1794573657883, hash: 9dpb44kk, sync: m63yqvfq }
+  q-gsct: { hash: hgffx6iu }
+  q-7dx9: { hash: dawu6a7p }
+  q-u3em: { hash: vi4hm2r3 }
+  q-jqip: { hash: 62r844ik }
+  q-f293: { hash: jaqz39fm }
+  q-kins: { hash: rwxsfyif }
+  q-c9u8: { hash: 3d4ucqx2 }
+  q-cbjc: { hash: 6qq6c9xu }
+  q-n667: { hash: fq9w2g27 }
+  q-9ypt: { hash: st4jacyv }
+  q-ebq2: { hash: iak3yfu7 }
+  q-kuei: { hash: qftx5g8f }
+  q-6edd: { hash: zgmskjqr }
+  q-yii2: { hash: v36q7a4d }
+  q-wtgx: { hash: ati8heiq }
+  q-w8c5: { hash: f8s2b3hd }
+  q-tieg: { hash: zgqrdtv6 }
+  q-973n: { hash: uvtisqxu }
+  q-ks4b: { hash: erqh57yg }
+  q-58gz: { hash: 5vq8t2ij }
+  q-4c4c: { hash: 927sts42 }
+  q-3jtq: { hash: s6nv55nx }
+  q-9ref: { hash: 4yjk87rd }
+  q-9vs3: { hash: wggjuyfc }
+  q-4am8: { hash: 827t3u8f }
+  q-ue22: { hash: dqu6pn85 }
+  q-4rbk: { hash: upv77bk3 }
+  q-3wht: { hash: ap6zr8i7 }
+  q-b5bc: { hash: d46kyjxb }
+  q-54xb: { hash: wuqvqk3b }
+  q-m7x7: { hash: 6t8uqudf }
+  q-qsc6: { hash: cwfhtesz }
+  q-vsgc: { hash: 7dhfkb3z }
+  q-tpan: { hash: x5gsw4tc }
+  q-qvxc: { hash: qxc4imrh }
+  q-5mxd: { hash: v6y7ej3f }
+  q-37zy: { hash: ttj87grq }
+  q-e2jd: { hash: mxpdnvia }
+  q-9mea: { hash: pw2nek5w }
+  q-keb7: { hash: t7r8s6wf }
+  q-endb: { hash: 8ddmk5q4 }
+  q-k47u: { hash: w5mxhe3s }
+  q-niqh: { hash: k6gr4wg5 }
+  q-jjvy: { hash: fxjveimb }
+  q-xwzq: { hash: xpb9k94x }
+  q-qkh5: { hash: 952sjdwt }
+  q-f9md: { hash: f33jx2wr }
+  q-q369: { hash: ghyi367e }
+  q-xru4: { hash: bn9ahxfp }
+  q-v5rc: { hash: 767ssrev }
+  q-pbga: { hash: fdwk3yv3 }
+  q-ztmw: { hash: b6suc7g9 }
+  q-9zi8: { hash: gqmcbzkx }
+  q-w8x4: { hash: kw2f7p62 }
+  q-rqdh: { hash: 7dha43pf }
+  q-kynb: { hash: tebph77i }
+  q-jusz: { hash: w4jpc6t6 }
+  q-gvbc: { hash: 8fut762t }
+  q-5jy8: { hash: qf2dxzrj }
+  q-rtdq: { hash: 9ckchzhb }
+  q-8gju: { hash: 58ez7v8m }
+  q-xz3k: { hash: ni3b4t72 }
+  q-wdxv: { hash: xmj8jhn5 }
+  q-f8sk: { hash: du7c6z7j }
+  q-6qfc: { hash: spqzd9js }
+  q-pwjf: { hash: kq39iehx }
+  q-he5s: { hash: amqdigcx }
+  q-h5rv: { hash: vityigkh }
+  q-3xrr: { hash: czp8f5tv }
+  q-yihx: { hash: y7cinwqd }
+  q-6pxw: { hash: 2kcxamnn }
+  q-b9pz: { hash: g4nn2rx3 }
+  q-ii9q: { hash: j2qb73sw }
+  q-qdcf: { hash: zvrpwt78 }
+  q-9bha: { hash: bbgeyxk8 }
+  q-yb4h: { hash: jyhmjjzb }
+  q-3zqi: { hash: x5xgzw4e }
+  q-76ms: { hash: kiiphxyh }
+  q-584p: { hash: uejpczvf }
+  q-3wx4: { hash: a7szwpdm }
+  q-y7pu: { hash: wy4cj7sa }
+  q-qdpa: { nid: 1794573661981, hash: qdkfb6eu, sync: 58t4ds2t }
+  q-a4xg: { nid: 1794573662031, hash: f7usewau, sync: cd728qrx }
+  q-9hbj: { nid: 1794573662082, hash: pqpuyaew, sync: rgy2zk5g }
+  q-g7xg: { nid: 1794573662132, hash: gfse6t96, sync: 229reutf }
 ---
 
 # Tools
@@ -266,26 +369,37 @@ Why add a spare byte when you `malloc` a test buffer of `n` elements?::`malloc(0
 ^q-jhg3
 
 What does the number in `man 3 printf` select?::The manual section. Section 3 is C library functions.
+^q-ys5e
 
 Which man section holds system calls, and which holds C library functions?::Section 2 for system calls (`write`, `open`), section 3 for library functions (`printf`, `malloc`).
+^q-pvvd
 
 Why does plain `man printf` show the wrong page for C?::It finds the shell command in section 1. Use `man 3 printf`.
+^q-b95s
 
 What does `(void)x;` do in a stub function?::Evaluates and discards `x`, which counts as a use and silences `-Wunused-parameter`. Delete it once the code really uses the parameter.
+^q-caws
 
 Why does gdb print the null byte as `'\000'`?::It writes non-printable chars as three-digit octal escapes. `'\000'` is the same value as `'\0'`.
+^q-8b7h
 
 In gdb's `0 '\000'`, what is the number before the char?::The char's integer value.
+^q-di2h
 
 Which call gives wall-clock time for timing code?::`clock_gettime(CLOCK_MONOTONIC, &ts)` from `<time.h>`. Take one before and one after, and subtract.
+^q-7axi
 
 What fields does `struct timespec` hold?::`tv_sec` and `tv_nsec`.
+^q-i62j
 
 What kind of build should you benchmark?::An optimized one (`-O2`) without `-fsanitize`, which slows things about 2x.
+^q-fjy2
 
 Why print (or otherwise use) the result of code you're timing?::Otherwise the compiler can delete the work.
+^q-ek54
 
 Which shell commands time a whole program?::`time ./prog` or `perf stat ./prog`.
+^q-qck6
 
 ## Basic gdb commands #card
 
@@ -788,12 +902,16 @@ Why does the two-pointer palindrome check need no odd/even special case?::When t
 ^q-gy2r
 
 How does naive substring search work?::Try each start in `haystack` and compare against `needle`. On a mismatch, restart at one past the previous start.
+^q-4z6m
 
 What's the worst case of naive substring search, and which input triggers it?::O(n·m), e.g. haystack `aaaa…a` with needle `aa…ab`: almost all of `needle` matches at every start before failing.
+^q-inz3
 
 In naive substring search, why return -1 if `haystack` hits `'\0'` mid-match?::No later start can fit `needle` either.
+^q-5ddf
 
 How does KMP substring search reach O(n + m)?::It never moves backwards in `haystack`. It precomputes, for each prefix of `needle`, how much is still matched after a mismatch.
+^q-uhwq
 
 # Linking and builds
 
@@ -822,142 +940,209 @@ What do CMake and Meson do?::Generate Ninja or Make files for big projects.
 ^q-8k2n
 
 Why does `#include "hashMap.c"` give you two `main`s?::`#include` pastes in the whole file, including its `main`.
+^q-ywkx
 
 How can you `#include` a `.c` file without its `main`?::Wrap its tests and `main` in `#ifndef HASHMAP_NO_MAIN` ... `#endif`, and `#define HASHMAP_NO_MAIN` before the include.
+^q-6tu6
 
 What's the usual way to reuse another `.c` file's code, instead of `#include`-ing it?::Put the declarations in a header, compile the `.c` separately, and link.
+^q-eu8h
 
 # Dynamic arrays and realloc
 
 What does `realloc(ptr, bytes)` do?::Resizes the heap block to `bytes`, keeping the old contents up to the smaller size. It may move the block.
+^q-gsct
 
 After `realloc`, which pointer do you use?::The returned one. If the block moved, the old pointer dangles.
+^q-7dx9
 
 What does `realloc(NULL, n)` do?::Acts like `malloc(n)`.
+^q-u3em
 
 What happens to the old block when `realloc` fails?::`realloc` returns NULL, and the old block is still valid and still yours.
+^q-jqip
 
 Why `realloc` into a temporary instead of straight into `v->data`?::On failure `v->data` would become NULL, and the old block would leak.
+^q-f293
 
 Why never `free` a block around a `realloc` call?::If `realloc` moves the block it frees the old one itself. If it fails, the old block is still in use.
+^q-kins
 
 How does unsigned overflow in `n * sizeof x` become a security bug?::It wraps silently to a small size, `realloc` succeeds with a tiny block, and later writes overrun the heap.
+^q-c9u8
 
 How do you check `new_cap * sizeof *v->data` for overflow?::Divide instead of multiplying: `if (new_cap > SIZE_MAX / sizeof *v->data) return false;` (`SIZE_MAX` is in `<stdint.h>`).
+^q-cbjc
 
 Why not call `realloc(ptr, 0)`?::C17 makes it implementation-defined and C23 makes it UB. A NULL result could mean failure or a free, and you can't tell which.
+^q-n667
 
 What does glibc do on `realloc(ptr, 0)`?::Frees `ptr` and returns NULL.
+^q-9ypt
 
 In a `struct vec` design, who owns what?::The caller owns the struct (often on the stack), and the vec owns the heap buffer `data`.
+^q-ebq2
 
 Why do `vec` functions take a `struct vec *`?::So they can change the caller's struct.
+^q-kuei
 
 What do `len` and `cap` count in a dynamic array?::`len` counts used slots, `cap` counts allocated ones.
+^q-6edd
 
 When and how does `vec_push` grow the buffer?::Only when `len` reaches `cap`, doubling the capacity, and changing nothing until `realloc` has succeeded.
+^q-yii2
 
 Why does `vec_free` set `data` to NULL?::A second `vec_free` becomes `free(NULL)`, a no-op, and the vec can be reused.
+^q-wtgx
 
 Where does the overflow check go in a growable buffer?::Once, at the choke point (`vec_push`'s grow step, `sb_reserve`). Everything after it is bounded by memory you already have.
+^q-w8c5
 
 Why can't `len + 1` overflow when `len < cap`?::`cap` already fits in `size_t`.
+^q-tieg
 
 Besides allocation sizes, where should you watch for integer overflow?::Signed `int` loop counters and arithmetic on input values (atoi), because signed overflow is UB.
+^q-973n
 
 How do you append `str` to a string builder with `memcpy`?::Take `n = strlen(str)` once, reserve, `memcpy(s->data + s->len, str, n + 1)`, then `s->len += n`.
+^q-ks4b
 
 Why do repeated `strcat` calls make appends O(n²)?::Each call rescans the destination from the start to find its end. Tracking `len` avoids that.
+^q-58gz
 
 Why never set an empty builder's `data = ""`?::A literal lives in read-only memory, not the heap, so a later `realloc` or `free` on it is UB.
+^q-4c4c
 
 Why keep an empty builder's `data = NULL` rather than allocating `""`?::Init stays infallible and allocation-free. Only `sb_str` and `sb_finish` need to handle the empty case.
+^q-3jtq
 
 How does `sb_finish` hand over the buffer without copying?::`char *out = s->data;`, reset the builder (`data = NULL`, `len = cap = 0`), and return `out`.
+^q-9ref
 
 Is the spare capacity past the `'\0'` leaked after `sb_finish`?::No. `free(out)` releases the whole block, because the allocator records its size.
+^q-9vs3
 
 How do you trim a finished buffer, and what if the trim fails?::`realloc(out, len + 1)`. If it fails, return `out`: a failed shrink leaves the original valid.
+^q-4am8
 
 When is trimming a finished string worth it?::For long-lived, numerous strings (e.g. hash map keys). A shrinking `realloc` may copy the block, and small blocks gain little.
+^q-ue22
 
 # Hash maps
 
 What does a hash map do with a key so it doesn't have to scan?::Hashes it to a number, turns that into a slot index, and looks there first.
+^q-4rbk
 
 What are a hash map's average and worst-case costs for lookup, insert, and remove?::O(1) on average. O(n) in the worst case, when many keys land in the same place.
+^q-3wht
 
 What is a hash collision?::Two different keys mapping to the same slot.
+^q-b5bc
 
 How do chaining and open addressing handle collisions?::Chaining gives each slot a linked list of entries. Open addressing keeps one flat array and puts the colliding key in another slot of it.
+^q-54xb
 
 In open addressing, each slot is ==EMPTY== (never used since the last rebuild), ==FULL== (holds a key and value), or ==TOMBSTONE== (held a key that was removed).
+^q-m7x7
 
 Why make EMPTY the 0 value of the slot-state enum?::`calloc` then gives an all-EMPTY table.
+^q-qsc6
 
 In linear probing, how do you move to the next slot?::`i = (i + 1) & (cap - 1)`: the next slot, wrapping around at the end.
+^q-vsgc
 
 In a linear-probing lookup, which slots do you probe past, and where do you stop?::Past FULL slots holding other keys and past TOMBSTONEs. Stop at an EMPTY slot: the key isn't there.
+^q-tpan
 
 Why can't remove mark a slot EMPTY in open addressing?::Another key may have probed past this slot when it was inserted. An EMPTY there would stop lookups early and hide that key.
+^q-qvxc
 
 What does a TOMBSTONE tell a lookup?::Keep probing.
+^q-5mxd
 
 What does remove do with the removed slot's key?::Frees the map's copy and sets `key` to NULL.
+^q-37zy
 
 With a power-of-two `cap`, how do you turn a hash `h` into a slot index?::`h & (cap - 1)`, the same as `h % cap` but cheaper.
+^q-e2jd
 
 Why does `h & (cap - 1)` work when `cap` is a power of two?::`cap - 1` is all 1 bits (e.g. `0b111` for 8), so it keeps the low bits of the hash.
+^q-9mea
 
 Why should a probe loop also count probes (`j < cap`)?::So it can't spin forever on a table with no EMPTY slot.
+^q-keb7
 
 Why is a probe loop safe on an empty map (`cap == 0`, `slots == NULL`)?::`cap - 1` wraps to `SIZE_MAX`, but `j < cap` makes the loop run 0 times, so `slots` is never read.
+^q-endb
 
 How does FNV-1 differ from FNV-1a?::FNV-1 multiplies before the XOR. FNV-1a XORs first, which gives slightly better avalanche.
+^q-k47u
 
 What is avalanche in a hash function?::Changing one input bit changes many of the output bits.
+^q-niqh
 
 How do you check an FNV-1a implementation?::Against the official test values, e.g. `fnv1a("")` must return the offset basis.
+^q-jjvy
 
 Why does `(uint64_t)*key` break FNV-1a for non-ASCII bytes on x86?::`char` is signed, so a byte like `0xE9` sign-extends to `0xFFFFFFFFFFFFFFE9`.
+^q-xwzq
 
 How should a hash read each byte of a `char *` key?::`h ^= (unsigned char)*key;`, which keeps each value between 0 and 255.
+^q-qkh5
 
 Why does `h ^= *key;` trigger `-Wsign-conversion`?::`*key` promotes to a signed `int`, which then converts to `uint64_t`.
+^q-f9md
 
 What is a hash map's load factor (counting tombstones)?::(FULL + TOMBSTONE slots) / `cap`.
+^q-q369
 
 Why grow a hash map before its load factor passes a limit like 0.7?::Probe runs get longer as it rises, and lookups slow toward O(n).
+^q-xru4
 
 Why do tombstones count toward the load factor?::Probes walk past them just like FULL slots.
+^q-v5rc
 
 What's the integer-only grow check for a 0.7 load limit?::Grow when `(len + tombstones + 1) * 10 > cap * 7`.
+^q-pbga
 
 Why does the grow check add 1 to `len + tombstones`?::`load_ok` is about the map after the put, so test the state the insert will create. Size a resized table for `len + 1` for the same reason.
+^q-ztmw
 
 Why can't a resize just copy the old slot array?::A key's slot depends on `cap` (`h & (cap - 1)`), so every FULL entry must be reinserted.
+^q-9zi8
 
 What happens to tombstones when a hash table is rebuilt?::They aren't copied, so the rebuild clears them.
+^q-w8x4
 
 How do the keys get into the new table during a rehash?::As pointers, with no new copies.
+^q-rqdh
 
 When should a rebuild keep the same capacity instead of doubling?::When tombstones make up much of the table. Sizing from `len + 1`, not from the old `cap`, does this automatically.
+^q-kynb
 
 How does a map that borrows keys differ from one that copies them?::Borrowing stores the caller's pointer, so the caller must keep the string alive and unchanged. Copying makes its own copy, so the caller can change or free its string right after `map_put`.
+^q-jusz
 
 How does a copying map store a key?::`malloc(strlen(key) + 1)`, then `memcpy` the key with its `'\0'`.
+^q-gvbc
 
 When does a copying map free its key copies?::On remove and in `map_free`.
+^q-5jy8
 
 How does `map_put` fail without changing the map when `malloc` fails?::Check `malloc`'s result before marking the slot FULL or changing `len`, so the slot stays EMPTY.
+^q-rtdq
 
 Why is it fine if `map_put` grew the table before its `malloc` failed?::The map still holds the same keys and values.
+^q-8gju
 
 What does Two Sum (LeetCode 1) ask?::Given an `int` array and a `target`, return the indices of the two elements that add up to `target`. There's exactly one answer, and no element is used twice.
+^q-xz3k
 
 How does a hash map solve Two Sum in one pass?::For each `x`, look up `target - x` among the values already seen (value → index). If it's there, that's the pair. Otherwise store `x`.
+^q-wdxv
 
 What do Two Sum's brute force and hash map solutions cost?::Brute force checks every pair, O(n²). The hash map is O(n) time and O(n) extra memory.
+^q-f8sk
 
 ## What is the 64-bit FNV-1a loop? #card
 
@@ -968,6 +1153,7 @@ for (; *key != '\0'; key++) {
   h *= 1099511628211u;               // FNV prime
 }
 ```
+^q-6qfc
 
 # Undefined behavior and the standard
 
@@ -1094,44 +1280,64 @@ Is `INT_MAX / 10 - d >= result` a correct overflow check for `result * 10 + d`?:
 ^q-6yuh
 
 Does `vec_init(struct vec *v)` need to `malloc` the struct?::No. The caller can pass `&v` for a stack `struct vec v;`. Assigning `v = malloc(...)` only changes the local copy of the pointer, and the memory leaks.
+^q-pwjf
 
 Does `sizeof(v->data)` give the element size?::No, it gives the pointer's size (8). Use `sizeof *v->data`, which is safe even when `data` is NULL because `sizeof` doesn't evaluate it.
+^q-he5s
 
 My `vec_push` called `realloc(v->data, ...)` without storing the result. What went wrong?::`data` never pointed at the new block: NULL after the first push, dangling if the block moved. Store into a temporary, then assign.
+^q-h5rv
 
 I updated `v->cap` before `realloc` returned. Why is that wrong?::On failure the vec is no longer unchanged. Compute `new_cap` in a local and assign it only after success.
+^q-3xrr
 
 Does `realloc` return `void`?::No, `void *`. `man 3 realloc` shows `void *realloc(void *ptr, size_t size);`.
+^q-yihx
 
 Should you cast `realloc`'s result, as in `(int *)realloc(...)`?::No. `void *` converts implicitly in C. Casting `malloc`/`realloc` is a C++ habit.
+^q-6pxw
 
 I wrote `newCap *= 2` with `newCap` starting at 0. What happened?::It stayed 0, so push 65 called `realloc(data, 0)`. Use `newCap = v->cap * 2`.
+^q-b9pz
 
 Does `free(p)` set `p` to NULL?::No. `p` still holds the old address, now dangling. Set it to NULL yourself.
+^q-ii9q
 
 Several identical-looking asserts could have failed. How do you tell which one did?::Read the line number in the assert message (`vecInt.c:101`) before guessing.
+^q-qdcf
 
 In `sb_reserve` I checked overflow against `cap`. What's the right check?::Guard the size you're about to compute, `len + extra + 1`: `if (extra > SIZE_MAX - 1 - s->len) return false;`.
+^q-9bha
 
 Should `sb_reserve` change `len`?::No. Reserving only makes room. `sb_append` adds to `len` after copying.
+^q-yb4h
 
 In `sb_reserve` I wrote `cap += newCap`. What's wrong?::`newCap` is already the new total, so set `cap = newCap`.
+^q-3zqi
 
 My `sb_append` never updated `s->len`. What breaks, and what's the fix?::The next append overwrites this one. Add `s->len += n` (not `n + 1`, since `len` doesn't count the `'\0'`).
+^q-76ms
 
 Is a string builder a series of strings like `hello\0world\0`?::No, it's one string. `data + len` is the old `'\0'`, which each append overwrites with its first char.
+^q-584p
 
 My `sb_reserve` doubling loop made room for `extra` chars. Why did appending 16 chars to an empty builder overflow?::The loop forgot the `'\0'`, giving a 16-byte buffer for a 17-byte `memcpy`. Compute `need = len + extra + 1` once and loop `while (newCap < need)`.
+^q-3wx4
 
 My `map_put` grew when `(len + tombstones) * 10 >= cap * 7`. Why did `load_ok` fail after some puts?::The check tested the map before the insert, so the insert could push it over 70%. Count the incoming key (`len + tombstones + 1`) in the trigger and when sizing the new table, instead of disabling the asserts.
+^q-y7pu
 
 Two Sum: I `malloc`'d an exactly sized buffer for each temporary key. What's better?::A stack buffer: `char key[12]; snprintf(key, sizeof key, "%d", x);`. The key lives for one call, and the map copies it anyway.
+^q-qdpa
 
 Why is `char key[12]` enough to hold any `int` as text?::`"-2147483648"` is 11 chars, plus the `'\0'`.
+^q-a4xg
 
 I thought exact sizing, or one reused `malloc`, beat a fixed stack buffer for a one-call key. Why not?::A stack buffer costs nothing to allocate and frees itself. The bytes saved don't matter for a key that lives one call.
+^q-9hbj
 
 My Two Sum ended with `return NULL` without calling `map_free`. What happened?::The map leaked. Call `map_free` before returning.
+^q-g7xg
 
 ## What's wrong with `char *(*f)(int) = &(int a){return a+1;}; *f(2);`? #card
 
