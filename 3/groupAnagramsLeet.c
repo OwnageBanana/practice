@@ -36,18 +36,86 @@ gcc -std=c17 -Wall -Wextra -Wpedantic -Wconversion -g -fsanitize=address,undefin
 //
 // LeetCode's real signature is
 // `char*** groupAnagrams(char** strs, int strsSize, int* returnSize, int** returnColumnSizes)`.
-
+#include <stdlib.h>
 #define HASHMAP_NO_MAIN
 #include "hashMap.c"
 
+
+static int cmp_char(const void *a, const void *b) {
+  const char x = *(const char *)a;
+  const char y = *(const char *)b;
+  return (x > y) - (x < y);
+}
 char ***groupAnagrams(char **strs, int strsSize, int *returnSize,
                       int **returnColumnSizes) {
-  // TODO
-  (void)strs;
-  (void)strsSize;
+
+
+  char ***ret = malloc(sizeof(*ret));
+  // *ret = malloc(sizeof(**ret)); // this is not required because we malloc this arr on first put. it causes this malloced pointer to leak
+  int *cols = malloc(sizeof(int *));
   *returnSize = 0;
-  *returnColumnSizes = NULL;
-  return NULL;
+
+  struct map m;
+  map_init(&m);
+
+  // aquire key size to malloc a buffer we can store at least the largest string into.
+  // store strLen along the way so we don't have to recount chars
+  size_t maxstrlen = 0;
+  char **a = strs;
+  size_t *strLens = malloc((size_t)strsSize * sizeof(size_t));
+  while (a < strs + strsSize) {
+    size_t currlen = strlen(*a);
+    strLens[a - strs] = currlen;
+    if (maxstrlen < currlen) maxstrlen = currlen;
+    a ++;
+  }
+  char *key = malloc(maxstrlen + 1);
+
+  a = strs;
+  int index = 0;
+  // loop each string, sorting it aphabetically for our map key. value of map entry is the index where to find the column holding other anagrams
+  // if key is in the map. add the unsorted string to the correct column
+  while (a < strs + strsSize) {
+    char *p = *a;
+    // memset(key,'\0', maxstrlen + 1);
+    memcpy(key, p, strLens[a - strs]);
+    qsort(key, strLens[a - strs], sizeof(*key), cmp_char);
+    key[strLens[a - strs]] = '\0';
+
+    int val;
+    if (map_get(&m,key,&val)) {
+      size_t i = (size_t)val;
+      size_t j = (size_t)cols[i];
+      cols[i]++;
+      ret[i] = realloc(ret[i], ((size_t)cols[i]) * sizeof(**ret));
+      ret[i][j] = *a;
+    } else {
+      map_put(&m, key, index);
+      size_t i = (size_t)index;
+      (*returnSize)++;
+
+      // resize array for new column size n -> size n+1
+      cols = realloc(cols, ((size_t)*returnSize) * sizeof(*cols));
+      cols[i] = 0;
+      size_t j = (size_t)cols[i];
+      index++;
+      cols[i]++;
+      // realloc for a new column [] => [nullptr]
+      ret = realloc(ret, ((size_t)*returnSize) * sizeof(*ret));
+      // malloc new column [nullptr] => [[]]
+      ret[i] = malloc(((size_t)cols[i]) * sizeof(**ret));
+      // ret[i] = realloc(ret[i], ((size_t)*returnColumnSizes[i]) * sizeof(**ret));
+      ret[i][j] = *a;
+    }
+    a++;
+  }
+  // assigning pointer down here because reallocs can move where the original malloc allocated memory
+  // resulting in a use after free
+  *returnColumnSizes = cols;
+  free(key);
+  free(strLens);
+  map_free(&m);
+  return ret;
 }
 
 // ---- Tests ----
@@ -71,6 +139,7 @@ static bool is_anagram(const char *a, const char *b) {
   return true;
 }
 
+
 static int cmp_ptr(const void *a, const void *b) {
   uintptr_t x = (uintptr_t)*(char *const *)a;
   uintptr_t y = (uintptr_t)*(char *const *)b;
@@ -92,7 +161,9 @@ static void check(const char *const *words, int n, int groups) {
   char ***got = groupAnagrams(strs, n, &size, &cols);
   assert(got != NULL);
   assert(cols != NULL);
+  printf("size == groups %d %d\n", size, groups);
   assert(size == groups);
+
 
   char **seen = malloc((size_t)n * sizeof *seen);
   assert(seen != NULL);
