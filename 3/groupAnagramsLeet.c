@@ -51,8 +51,10 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize,
 
 
   char ***ret = malloc(sizeof(*ret));
+  assert(ret != NULL);
   // *ret = malloc(sizeof(**ret)); // this is not required because we malloc this arr on first put. it causes this malloced pointer to leak
-  int *cols = malloc(sizeof(int *));
+  int *cols = malloc(sizeof(int));
+  assert(cols != NULL);
   *returnSize = 0;
 
   struct map m;
@@ -63,6 +65,7 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize,
   size_t maxstrlen = 0;
   char **a = strs;
   size_t *strLens = malloc((size_t)strsSize * sizeof(size_t));
+  assert(strLens != NULL);
   while (a < strs + strsSize) {
     size_t currlen = strlen(*a);
     strLens[a - strs] = currlen;
@@ -70,11 +73,15 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize,
     a ++;
   }
   char *key = malloc(maxstrlen + 1);
+  assert(key != NULL);
 
   a = strs;
   int index = 0;
   // loop each string, sorting it aphabetically for our map key. value of map entry is the index where to find the column holding other anagrams
   // if key is in the map. add the unsorted string to the correct column
+  // this was "lazy" in the sense that I am not efficiently allocating memory.
+  // either I should allocate ahead of time by pre-processing the map
+  // or by growing my allocated memory in powers of 2 so I make fewer allocations.
   while (a < strs + strsSize) {
     char *p = *a;
     // memset(key,'\0', maxstrlen + 1);
@@ -88,6 +95,7 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize,
       size_t j = (size_t)cols[i];
       cols[i]++;
       ret[i] = realloc(ret[i], ((size_t)cols[i]) * sizeof(**ret));
+      assert(ret[i] != NULL);
       ret[i][j] = *a;
     } else {
       map_put(&m, key, index);
@@ -96,14 +104,17 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize,
 
       // resize array for new column size n -> size n+1
       cols = realloc(cols, ((size_t)*returnSize) * sizeof(*cols));
+      assert(cols != NULL);
       cols[i] = 0;
       size_t j = (size_t)cols[i];
       index++;
       cols[i]++;
       // realloc for a new column [] => [nullptr]
       ret = realloc(ret, ((size_t)*returnSize) * sizeof(*ret));
+      assert(ret != NULL);
       // malloc new column [nullptr] => [[]]
       ret[i] = malloc(((size_t)cols[i]) * sizeof(**ret));
+      assert(ret[i] != NULL);
       // ret[i] = realloc(ret[i], ((size_t)*returnColumnSizes[i]) * sizeof(**ret));
       ret[i][j] = *a;
     }
