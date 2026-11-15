@@ -172,7 +172,6 @@ static void check(const char *const *words, int n, int groups) {
   char ***got = groupAnagrams(strs, n, &size, &cols);
   assert(got != NULL);
   assert(cols != NULL);
-  printf("size == groups %d %d\n", size, groups);
   assert(size == groups);
 
 
